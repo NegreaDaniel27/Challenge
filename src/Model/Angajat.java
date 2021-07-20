@@ -2,20 +2,23 @@ package Model;
 
 import java.util.Date;
 
-public class Angajati {
+public class Angajat {
 
+    private int id;
     private String nume;
     private String prenume;
     private Date dataAngajare;
 
 
-    public Angajati() {
+    public Angajat() {
     }
 
-    public Angajati(String nume, String prenume, Date dataAngajare) {
+    public Angajat(int id, String nume, String prenume, Date dataAngajare) {
+        this.id = id;
         this.nume = nume;
         this.prenume = prenume;
         this.dataAngajare = dataAngajare;
+
     }
 
     public String getNume() {
@@ -42,10 +45,19 @@ public class Angajati {
         this.dataAngajare = dataAngajare;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "Angajati{" +
-                "nume='" + nume + '\'' +
+        return "Angajat{" +
+                "id=" + id +
+                ", nume='" + nume + '\'' +
                 ", prenume='" + prenume + '\'' +
                 ", dataAngajare=" + dataAngajare +
                 "}\n";
