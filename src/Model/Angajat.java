@@ -1,6 +1,6 @@
 package Model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Angajat {
 
@@ -8,17 +8,29 @@ public class Angajat {
     private String nume;
     private String prenume;
     private Date dataAngajare;
+    private Functii functii;
 
-
-    public Angajat() {
+    public Angajat(String nume, String prenume, Date dataAngajare, Functii functii) {
+        this.nume = nume;
+        this.prenume = prenume;
+        this.dataAngajare = dataAngajare;
+        this.functii = functii;
     }
 
-    public Angajat(int id, String nume, String prenume, Date dataAngajare) {
+    public Angajat(int id, String nume, String prenume, Date dataAngajare, Functii functii) {
         this.id = id;
         this.nume = nume;
         this.prenume = prenume;
         this.dataAngajare = dataAngajare;
+        this.functii = functii;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNume() {
@@ -45,12 +57,12 @@ public class Angajat {
         this.dataAngajare = dataAngajare;
     }
 
-    public int getId() {
-        return id;
+    public Functii getFunctii() {
+        return functii;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setFunctii(Functii functii) {
+        this.functii = functii;
     }
 
     @Override
@@ -60,6 +72,7 @@ public class Angajat {
                 ", nume='" + nume + '\'' +
                 ", prenume='" + prenume + '\'' +
                 ", dataAngajare=" + dataAngajare +
+                ", functii=" + functii +
                 "}\n";
     }
 }

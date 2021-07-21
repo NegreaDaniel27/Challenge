@@ -2,15 +2,21 @@ package Model;
 
 public class Departamente {
 
+    private String departament;
     private Angajat angajat;
     private Director director;
 
     public Departamente() {
     }
 
-    public Departamente(Angajat angajat, Director director) {
+    public Departamente(String departament, Angajat angajat, Director director) {
+        this.departament = departament;
         this.angajat = angajat;
         this.director = director;
+    }
+
+    public Departamente(String departament) {
+        this.departament = departament;
     }
 
     public Angajat getAngajat() {
@@ -33,6 +39,7 @@ public class Departamente {
     @Override
     public String toString() {
         return "Departament{" +
+                "nume departament=" + departament +
                 "angajat=" + angajat +
                 ", director=" + director +
                 "}\n";
