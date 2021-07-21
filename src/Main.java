@@ -5,8 +5,20 @@
 // 5   să primească ca parametrii un angajat care hotărăște să părăsească compania și un înlocuitor al acestuia. Este nevoie ca acest cod să realizeze interschimbarea celor doi în toate rolurile pe care le are angajatul care părăsește compania (Departamente, Proiecte, superior ierarhic direct)
 
 
+import Dao.AngajatDao;
+import Model.Angajat;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class Main {
 
+    public static void main(String[] args) {
 
+        AngajatDao angajatDao = new AngajatDao();
+        List<Angajat> angajatList = angajatDao.findAll(1);
+        System.out.println(angajatList);
+
+    }
 }

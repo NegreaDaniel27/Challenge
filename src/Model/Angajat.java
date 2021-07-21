@@ -2,6 +2,8 @@ package Model;
 
 import java.sql.Date;
 
+//import java.util.Date;
+
 public class Angajat {
 
     private int id;
@@ -23,6 +25,10 @@ public class Angajat {
         this.prenume = prenume;
         this.dataAngajare = dataAngajare;
         this.functii = functii;
+    }
+
+    public Angajat() {
+
     }
 
     public int getId() {
