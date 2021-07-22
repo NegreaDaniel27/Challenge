@@ -6,10 +6,15 @@
 
 
 import Dao.AngajatDao;
+import Dao.DepartamenteDao;
+import Dao.FunctiiDao;
 import Model.Angajat;
+import Model.Departamente;
+import Model.Director;
+import Model.Functii;
 
+import java.sql.Date;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class Main {
@@ -17,8 +22,38 @@ public class Main {
     public static void main(String[] args) {
 
         AngajatDao angajatDao = new AngajatDao();
-        List<Angajat> angajatList = angajatDao.findAll(1);
-        System.out.println(angajatList);
+        FunctiiDao functiiDao = new FunctiiDao();
+        DepartamenteDao departamenteDao = new DepartamenteDao();
+
+
+
+
+//        List<Angajat> angajatList = angajatDao.findAll(1);
+//        System.out.println(angajatList);
+
+
+//        List<Functii> functiiList = functiiDao.findAll();
+//        System.out.println(functiiList);
+
+//        Angajat angajat = angajatDao.findById(2);
+//        System.out.println(angajat);
+
+
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(dataAngajare);
+//        int year = calendar.get(Calendar.YEAR);
+
+
+
+/////  LISTA CU TOTI ANGAJATII DINTR-UN DEPARTAMENT TRIMIS CA PARAMETRU   /////
+        List<Departamente> departamenteList = departamenteDao.findAll(1);
+        System.out.println(departamenteList);
+
+
+//        Departamente departamente = departamenteDao.findById(2);
+//        System.out.println(departamente);
+
+
 
     }
 }

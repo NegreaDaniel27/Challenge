@@ -1,19 +1,27 @@
 package Challenge;
 
 import Dao.AngajatDao;
+import Dao.FunctiiDao;
 import Model.Angajat;
 
 import java.util.List;
 
 public class AngajatService {
 
-    private AngajatDao angajatDao;
+    private final AngajatDao angajatDao;
+    private final FunctiiDao functiiDao;
 
-    public AngajatService() {
-        this.angajatDao = new AngajatDao();
+    public AngajatService(AngajatDao angajatDao, FunctiiDao functiiDao) {
+        this.angajatDao = angajatDao;
+        this.functiiDao = functiiDao;
     }
 
-    public List<Angajat> angajatList(){
-        return AngajatDao.findAll();
+
+    public List<Angajat> findAll(int id) {
+        return angajatDao.findAll(id);
     }
+
+
+
+
 }

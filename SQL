@@ -1,1 +1,146 @@
-create
+create database challenge;
+
+drop table functii;
+drop table angajat;
+drop table director;
+drop table departamente;
+drop table concedii;
+drop table proiecte;
+
+CREATE TABLE functii (
+    id INT AUTO_INCREMENT,
+    functie VARCHAR(100),
+    salariu INT,
+    PRIMARY KEY (id)
+);
+insert into functii(functie, salariu) values
+('functie1', 1500),
+('functie2', 1600),
+('functie3', 1700),
+('functie4', 1800),
+('functie5', 1900);
+
+SELECT 
+    *
+FROM
+    functii;
+
+
+CREATE TABLE angajat (
+    id INT AUTO_INCREMENT,
+    nume VARCHAR(50) NOT NULL,
+    prenume VARCHAR(50) NOT NULL,
+    data_angajare DATETIME,
+    functii_id INT NOT NULL,
+    FOREIGN KEY (functii_id)
+        REFERENCES functii(id),
+    PRIMARY KEY (id)
+);
+insert into angajat(nume, prenume, data_angajare, functii_id) values
+('Marin', 'Mircea', '2019-08-12', 1),
+('Duca', 'David', '2016-06-01', 2),
+('Ristea', 'Andreea', '2017-07-17', 3),
+('Mitrea', 'Mona', '2018-10-22', 4),
+('Neagu', 'Andrei', '2020-09-26', 5),
+('Giurgiu', 'Bianca', '2016-09-18', 3),
+('Bardu', 'Cristian', '2020-05-24', 1),
+('Hrishan', 'Marcu', '2018-11-06', 5),
+('Tataru', 'Estera', '2019-01-19', 2),
+('Tataru', 'Estera', '2020-12-02', 4);
+SELECT 
+    *
+FROM
+    angajat;
+
+CREATE TABLE director (
+    id INT AUTO_INCREMENT,
+    nume VARCHAR(50) NOT NULL,
+    prenume VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+insert into director(nume, prenume) values
+('Duca', 'Laurentiu'),
+('Cantrea', 'Nicoleta'),
+('Lovinel', 'Cristina');
+SELECT 
+    *
+FROM
+    director;
+
+CREATE TABLE departamente (
+    id INT,
+    departament VARCHAR(100) NOT NULL,
+    angajat_id INT NOT NULL,
+    director_id INT NOT NULL,
+    FOREIGN KEY (angajat_id)
+        REFERENCES angajat (id),
+    FOREIGN KEY (director_id)
+        REFERENCES director (id)
+);
+insert into departamente(id, departament, angajat_id, director_id) values
+(1, 'depatament1', 1, 1),
+(1, 'depatament1', 2, 1),
+(1, 'depatament1', 3, 1),
+(1, 'depatament1', 4, 1),
+(2, 'depatament2', 5, 2),
+(2, 'depatament2', 6, 2),
+(2, 'depatament2', 7, 2),
+(3, 'depatament3', 8, 3),
+(3, 'depatament3', 9, 3),
+(3, 'depatament3', 10, 3);
+SELECT 
+    *
+FROM
+    departamente;
+
+CREATE TABLE concedii (
+    data_concediu DATETIME,
+    angajat_id INT NOT NULL,
+    FOREIGN KEY (angajat_id)
+        REFERENCES angajat (id)
+);
+insert into concedii (data_concediu, angajat_id) values
+('2021-08-12', 1),
+('2021-09-22', 2),
+('2021-10-03', 3),
+('2021-11-09', 4),
+('2021-12-24', 5),
+('2022-01-27', 6),
+('2022-02-04', 7),
+('2021-08-21', 8),
+('2021-10-18', 9),
+('2021-12-25', 10);
+SELECT 
+    *
+FROM
+    concedii;
+
+CREATE TABLE proiecte (
+    id INT AUTO_INCREMENT,
+    proiect VARCHAR(100),
+    data_inceput DATETIME,
+    deadline DATETIME,
+    PRIMARY KEY (id)
+);
+insert into proiecte (proiect, data_inceput, deadline) values
+('proiect1', '2021-08-23', '2021-09-07'),
+('proiect2', '2021-09-17', '2021-09-30'),
+('proiect3', '2021-09-26', '2021-10-20'),
+('proiect4', '2021-10-26', '2021-11-30');
+SELECT 
+    *
+FROM
+    proiecte;
+    
+    
+    select angajat.id, angajat.nume, angajat.prenume, angajat.data_angajare, functii.id, functii.functie, functii.salariu
+    from angajat
+    inner join functii on functii.id = angajat.functii_id
+    where angajat.functii_id = ?;
+    
+    
+    select angajat.data_angajare, functii.salariu
+    from angajat
+    inner join functii on functii.id = angajat.functii_id
+    where angajat.functii_id = 1;
+

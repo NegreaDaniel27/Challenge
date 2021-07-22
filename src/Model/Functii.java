@@ -44,8 +44,8 @@ public class Functii {
     @Override
     public String toString() {
         return "Functii{" +
-                "nume functie=" + functie +
-                "id=" + id +
+                "nume functie= " + functie +
+                ", id=" + id +
                 ", salariu=" + salariu +
                 "}\n";
     }

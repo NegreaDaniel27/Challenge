@@ -5,6 +5,7 @@ import Model.Functii;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AngajatDao extends GenericDao {
@@ -48,30 +49,32 @@ public class AngajatDao extends GenericDao {
 
 
 
-    public Angajat findById(int angajatId) {
+    public Angajat findById(int id) {
         Angajat angajat = new Angajat();
-        String query = "select a.id, a.nume, a.prenume, a.data_angajare, f.functie, f.salariu" +
-                "from angajat as a " +
-                "inner join functii_f on a.functii_id = f.id"+
-                "where a.id = ?";
+        Functii functii =new Functii();
+        String query = "select angajat.id, angajat.nume, angajat.prenume, angajat.data_angajare, functii.id, functii.functie, functii.salariu\n" +
+                "    from angajat\n" +
+                "    inner join functii on functii.id = angajat.functii_id\n" +
+                "    where angajat.id = ?";
 
         try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
-            preparedStatement.setInt(1, angajatId);
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
+
             if (resultSet.next()) {
-                int id = resultSet.getInt("angajat.id");
-                String nume = resultSet.getString("nume");
-                String prenume = resultSet.getString("Prenume");
-                Date dataAngajare = resultSet.getDate("data_angajare");
-
-                int functieId = resultSet.getInt("functii.id");
-                String functie = resultSet.getString("functii.funcie");
-                int salariu = resultSet.getInt("functii.salariu");
-                Functii functii = new Functii(functieId, functie, salariu);
+                angajat.setId(resultSet.getInt("angajat.id"));
+                angajat.setNume(resultSet.getString("angajat.nume"));
+                angajat.setPrenume(resultSet.getString("angajat.prenume"));
+                angajat.setDataAngajare(resultSet.getDate("angajat.data_angajare"));
 
 
-                return new Angajat(id, nume, prenume, dataAngajare, functii);
+                functii.setId(resultSet.getInt("functii.id"));
+                functii.setFunctie(resultSet.getString("functii.functie"));
+                functii.setSalariu(resultSet.getInt("functii.salariu"));
+                angajat.setFunctii(functii);
+
             }
 
         } catch (SQLException throwables) {
@@ -81,36 +84,39 @@ public class AngajatDao extends GenericDao {
         return angajat;
     }
 
-    public Angajat findDataAngajat(int angajatId) {
-        Angajat dataAngajat = new Angajat();
-        String query = "select data_angajare" +
-                "from angajat \n" +
-                "where angajat.id = ?";
-
-        try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
-            preparedStatement.setInt(1, angajatId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                int id = resultSet.getInt("angajat.id");
-                String nume = resultSet.getString("nume");
-                String prenume = resultSet.getString("Prenume");
-                Date dataAngajare = resultSet.getDate("data_angajare");
-
-                int functieId = resultSet.getInt("functii.id");
-                String functie = resultSet.getString("functii.funcie");
-                int salariu = resultSet.getInt("functii.salariu");
-                Functii functii = new Functii(functieId, functie, salariu);
 
 
-                return new Angajat(id, nume, prenume, dataAngajare, functii);
-            }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        return dataAngajat;
-    }
+//    public Angajat findDataAngajat(int angajatId) {
+//        Angajat dataAngajat = new Angajat();
+//        String query = "select data_angajare" +
+//                "from angajat \n" +
+//                "where angajat.id = ?";
+//
+//        try {
+//            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+//            preparedStatement.setInt(1, angajatId);
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            if (resultSet.next()) {
+//                int id = resultSet.getInt("angajat.id");
+//                String nume = resultSet.getString("nume");
+//                String prenume = resultSet.getString("Prenume");
+//                Date dataAngajare = resultSet.getDate("data_angajare");
+//
+//                int functieId = resultSet.getInt("functii.id");
+//                String functie = resultSet.getString("functii.funcie");
+//                int salariu = resultSet.getInt("functii.salariu");
+//                Functii functii = new Functii(functieId, functie, salariu);
+//
+//
+//                return new Angajat(id, nume, prenume, dataAngajare, functii);
+//            }
+//
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//
+//        return dataAngajat;
+//    }
 
 }

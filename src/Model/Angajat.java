@@ -12,6 +12,10 @@ public class Angajat {
     private Date dataAngajare;
     private Functii functii;
 
+    public Angajat(Date dataAngajare) {
+        this.dataAngajare = dataAngajare;
+    }
+
     public Angajat(String nume, String prenume, Date dataAngajare, Functii functii) {
         this.nume = nume;
         this.prenume = prenume;
@@ -28,6 +32,10 @@ public class Angajat {
     }
 
     public Angajat() {
+
+    }
+
+    public Angajat(java.util.Date dataAngajare) {
 
     }
 
@@ -81,4 +89,6 @@ public class Angajat {
                 ", functii=" + functii +
                 "}\n";
     }
+
+
 }
